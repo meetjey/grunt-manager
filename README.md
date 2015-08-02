@@ -6,7 +6,7 @@ Manage gruntfiles from inside Atom.
 
 ##### Commands
 * ctrl-k ctrl-t: toggles panel
-* ctrl-k ctrl-g create new grunt pane
+* ctrl-k ctrl-n create new grunt pane
 * ctrl-k ctrl-r: refreshes window
 * ctrl-k ctrl-c: closes window
 
