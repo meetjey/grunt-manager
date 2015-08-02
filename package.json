@@ -1,0 +1,31 @@
+{
+  "name": "grunt-manager",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Manage gruntfiles from inside Atom",
+  "keywords": [
+    "grunt",
+    "runner",
+    "manager"
+  ],
+  "repository": "https://github.com/benjaminRomano/grunt-manager",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0"
+  },
+  "dependencies": {
+    "ansi-to-html": "^0.3.0",
+    "atom-bottom-dock": "^0.2.3",
+    "space-pen": "^5.1.1"
+  },
+  "packageDependencies": {
+    "bottom-dock": "^0.1.0"
+  },
+  "consumedServices": {
+    "bottom-dock": {
+      "versions": {
+        "^0.0.0": "consumeBottomDock"
+      }
+    }
+  }
+}

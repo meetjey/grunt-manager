@@ -1,0 +1,97 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.grunt-pane {
+  height: 100%;
+  display: block;
+
+  ul {
+    max-height: 100%;
+    list-style-type: none;
+    padding: 0px;
+  }
+
+  li {
+    margin: 0;
+    padding: 0 0px 5px 5px;
+    font-size: 13px;
+
+    span {
+      cursor: pointer;
+      padding: 3px;
+
+      &:hover {
+        color: @text-color-highlight;
+        background-color: @background-color-selected;
+        border-radius: 3px;
+      }
+
+      &:active {
+        color: @text-color-selected;
+      }
+    }
+  }
+
+  .grunt-view {
+      height: 100%;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+
+      .file-container {
+        width: 100%;
+        overflow: auto;
+        flex: 1;
+      }
+  }
+
+  .output-view {
+    height: 100%;
+    padding: 5px;
+    display: flex;
+
+    .task-container {
+      height: 100%;
+      flex: 0 0 30%;
+      border-right: 1px solid @base-border-color;
+      padding-right: 5px;
+      display: flex;
+      flex-direction:column;
+
+      .task-list-container {
+        flex: 1;
+        overflow: auto;
+      }
+
+      .custom-task-container {
+        padding: 5px;
+        font-size: 12px;
+      }
+
+      .control-container {
+        padding: 0 5px 5px 5px;
+        font-size: 12px;
+
+        button {
+          width: 50%;
+        }
+      }
+
+    }
+
+    .output-container {
+      flex: 1;
+      overflow: auto;
+      padding-left: 10px;
+
+      pre {
+        padding: 0;
+        font-size: 11px;
+        background-color: @base-background-color;
+      }
+    }
+  }
+}
