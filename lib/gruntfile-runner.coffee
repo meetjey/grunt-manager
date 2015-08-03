@@ -1,5 +1,5 @@
 FileFinderUtil = require('./file-finder-util')
-{BufferedProcess} = require 'atom'
+{BufferedProcess} = require('atom')
 
 class GruntfileRunner
   constructor: (@filePath) ->

@@ -48,8 +48,7 @@ class OutputView extends View
 
   addGruntTasks: ->
     @tasks = []
-    output = "fetching tasks for #{@filePath}"
-    output += " with args: #{@gruntfile.args}" if @gruntfile.args
+    output = "fetching tasks for #{@gruntfile.relativePath}"
     @writeOutput(output, 'text-info')
 
     @taskList.empty()
@@ -68,7 +67,7 @@ class OutputView extends View
         @onExit(code)
 
     @gruntfileRunner.getGruntTasks(onTaskOutput.bind(@),
-      @onError.bind(@), onTaskExit.bind(@), @gruntfile.args)
+      @onError.bind(@), onTaskExit.bind(@))
 
   onStopClicked: ->
     if @gruntfileRunner
@@ -81,9 +80,8 @@ class OutputView extends View
   onDidClickBack: (callback) ->
     return @emitter.on('backButton:clicked', callback)
 
-  setupgruntfileRunner: (@gruntfile) ->
-    @filePath = FileFinderUtil.createPath(@gruntfile.dir, @gruntfile.fileName)
-    @gruntfileRunner = new gruntfileRunner(@filePath)
+  setupGruntfileRunner: (@gruntfile) ->
+    @gruntfileRunner = new gruntfileRunner(@gruntfile.path)
 
   runTask: (task) ->
     @gruntfileRunner.runGrunt(task,
@@ -117,7 +115,7 @@ class OutputView extends View
     @taskList.empty()
 
     if gruntfile
-      @setupgruntfileRunner(gruntfile)
+      @setupGruntfileRunner(gruntfile)
 
     if @gruntfileRunner
       @addGruntTasks()

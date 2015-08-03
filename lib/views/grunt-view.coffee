@@ -16,9 +16,12 @@ class GruntView extends View
 
   createGruntfileList: ->
     @fileList.empty()
-    for gruntfile in @fileFinderUtil.findFiles(/^Gruntfile\.[js|coffee]/i)
-      filePath = FileFinderUtil.createPath(gruntfile.dir, gruntfile.fileName)
-      listItem = $("<li><span class='icon icon-file-text'>#{filePath}</span></li>")
+    for filePath in @fileFinderUtil.findFiles(/^Gruntfile\.[js|coffee]/i)
+      gruntfile =
+        path: filePath
+        relativePath: FileFinderUtil.getRelativePath(filePath)
+
+      listItem = $("<li><span class='icon icon-file-text'>#{gruntfile.relativePath}</span></li>")
 
       do (gruntfile, @emitter) ->
         listItem.first().on('click', ->
