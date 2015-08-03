@@ -1,7 +1,7 @@
 {
   "name": "grunt-manager",
   "main": "./lib/main",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Manage gruntfiles from inside Atom",
   "keywords": [
     "grunt",
