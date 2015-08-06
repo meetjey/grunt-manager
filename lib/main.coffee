@@ -1,4 +1,6 @@
 {CompositeDisposable} = require('atom')
+{BasicTabButton} = require('atom-bottom-dock')
+
 GruntPane = require('./views/grunt-pane')
 
 module.exports =
@@ -27,7 +29,15 @@ module.exports =
     if @bottomDock
       newPane = new GruntPane()
       @gruntPanes.push(newPane)
-      @bottomDock.addPane(newPane, 'Grunt')
+
+      config =
+        name: 'Grunt'
+        id: newPane.getId()
+        active: newPane.isActive()
+
+      newTabButton = new BasicTabButton(config)
+
+      @bottomDock.addPane(newPane, newTabButton)
 
   deactivate: ->
     @subscriptions.dispose()
