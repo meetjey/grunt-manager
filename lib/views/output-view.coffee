@@ -75,13 +75,14 @@ class OutputView extends View
       @writeOutput('Task Stopped', 'text-info')
 
   onBackClicked: ->
+    @gulpfile = null
     @emitter.emit('backButton:clicked')
 
   onDidClickBack: (callback) ->
     return @emitter.on('backButton:clicked', callback)
 
-  setupGruntfileRunner: (@gruntfile) ->
-    @gruntfileRunner = new gruntfileRunner(@gruntfile.path)
+  setupGruntfileRunner: (gruntfile) ->
+    @gruntfileRunner = new gruntfileRunner(gruntfile.path)
 
   runTask: (task) ->
     @gruntfileRunner.runGrunt(task,
@@ -115,13 +116,15 @@ class OutputView extends View
     @taskList.empty()
 
     if gruntfile
-      @setupGruntfileRunner(gruntfile)
+      @gruntfile = gruntfile
 
-    if @gruntfileRunner
+    if @gruntfile
+      @setupGruntfileRunner(@gruntfile)
       @addGruntTasks()
 
   destroy: ->
     @gruntfileRunner.destroy() if @gruntfileRunner
+    @gruntfileRunner = null
     @subscriptions.dispose() if @subscriptions
 
 module.exports = OutputView

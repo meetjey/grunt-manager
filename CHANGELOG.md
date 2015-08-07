@@ -1,3 +1,6 @@
+## 0.1.3
+* Fixed refresh
+
 ## 0.1.2
 * Updated Grunt-Manager to use v0.1.0 of bottom-dock-service
 
