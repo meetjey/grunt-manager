@@ -11,38 +11,34 @@ class GruntfileRunner
       allOutput = allOutput + output
 
     onExit = (code) ->
-      if code == 0
-        onOutput(extractTasks(allOutput))
-      onFinished(code)
+      onOutput(extractTasks(allOutput)) if code == 0
+      onFinished code
 
-    @runGrunt('--help', concatOutput, onError, onExit, '--no-color')
-    return
+    @runGrunt '--help', concatOutput, onError, onExit, '--no-color'
 
   extractTasks = (output) ->
-    lines = output.split('\n')
+    lines = output.split '\n'
     tasksStart = lines.indexOf('Available tasks') + 1
     tasksEnd = tasksStart + lines.slice(tasksStart).indexOf('')
 
-    tasks = lines.slice(tasksStart, tasksEnd).map((line) ->
-      return line.trim().split(' ')[0]
-    )
+    tasks = lines.slice(tasksStart, tasksEnd).map (line) ->
+      line.trim().split(' ')[0]
 
-    return tasks
+    tasks
 
   runGrunt: (task, stdout, stderr, exit, extraArgs) ->
-    if @process
-      @process.kill()
-      @process = null
+    @process.kill() if @process
+    @process = null
 
     args = ['--gruntfile', @filePath]
 
     if task
-      for arg in task.split(' ')
-        args.push(arg)
+      for arg in task.split ' '
+        args.push arg
 
     if extraArgs
-      for arg in extraArgs.split(' ')
-        args.push(arg)
+      for arg in extraArgs.split ' '
+        args.push arg
 
     process.env.PATH = switch process.platform
       when 'win32' then process.env.PATH
@@ -51,19 +47,16 @@ class GruntfileRunner
     options =
       env: process.env
 
-    @process = new BufferedProcess({
+    @process = new BufferedProcess
       command: 'grunt'
       args: args
       options: options
       stdout: stdout
       stderr: stderr
       exit: exit
-    })
 
   destroy: ->
-    if @process
-      @process.kill()
-      @process = null
-    return
+    @process.kill() if @process
+    @process = null
 
 module.exports = GruntfileRunner

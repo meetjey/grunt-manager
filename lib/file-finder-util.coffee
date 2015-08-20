@@ -1,25 +1,25 @@
-fs = require('fs')
-path = require('path')
+fs = require 'fs'
+path = require 'path'
 
 class FileFinderUtil
 
   @getRelativePath: (filePath) ->
-    [projectPath, relativePath] = atom.project.relativizePath(filePath)
+    [projectPath, relativePath] = atom.project.relativizePath filePath
 
     if atom.project.getPaths().length == 1
       return relativePath
 
-    dirs = projectPath.split(path.sep)
-    return path.join(dirs[dirs.length - 1], relativePath)
+    dirs = projectPath.split path.sep
+    path.join dirs[dirs.length - 1], relativePath
 
 
   findFiles: (regex) ->
     projPaths = atom.project.getPaths()
 
     foundFiles = projPaths.filter((p) -> p != 'atom://config' and p!= 'atom://.atom/config')
-      .map((path) -> return findFilesHelper(path, regex))
+      .map((path) -> findFilesHelper path, regex)
       .reduce((results, files) ->
-        return results.concat(files)
+        results.concat files
       , [])
 
     return foundFiles
@@ -29,18 +29,18 @@ class FileFinderUtil
     files = []
 
     for entry in fs.readdirSync(cwd) when entry.indexOf('.') isnt 0
-      if regex.test(entry)
+      if regex.test entry
         files.push(path.join(cwd,entry))
 
       else if entry.indexOf('node_modules') is -1
-        abs = path.join(cwd, entry)
+        abs = path.join cwd, entry
         if fs.statSync(abs).isDirectory()
           dirs.push abs
 
     for dir in dirs
-      if foundFiles = findFilesHelper(dir, regex)
+      if foundFiles = findFilesHelper dir, regex
         files = files.concat(foundFiles)
 
-    return files
+    files
 
 module.exports = FileFinderUtil

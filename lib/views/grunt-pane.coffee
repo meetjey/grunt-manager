@@ -1,7 +1,7 @@
-{DockPaneView} = require('atom-bottom-dock')
-{Emitter, CompositeDisposable} = require('atom')
-GruntView = require('./grunt-view')
-OutputView = require('./output-view')
+{DockPaneView} = require 'atom-bottom-dock'
+{Emitter, CompositeDisposable} = require 'atom'
+GruntView = require './grunt-view'
+OutputView = require './output-view'
 
 class GruntPane extends DockPaneView
   @content: ->
@@ -17,23 +17,22 @@ class GruntPane extends DockPaneView
     @outputView.hide()
     @activeView = @gruntView
 
-    @subscriptions.add(@gruntView.onDidClickGruntfile(@switchToOutputView.bind(@)))
-    @subscriptions.add(@outputView.onDidClickBack(@switchToGruntView.bind(@)))
+    @subscriptions.add @gruntView.onDidClickGruntfile @switchToOutputView
+    @subscriptions.add @outputView.onDidClickBack @switchToGruntView
 
-  switchToGruntView: ->
+  switchToGruntView: =>
     @outputView.hide()
     @gruntView.show()
     @activeView = @gruntView
 
-  switchToOutputView: (gruntfile) ->
+  switchToOutputView: (gruntfile) =>
     @gruntView.hide()
     @outputView.show()
     @activeView = @outputView
-    @outputView.refresh(gruntfile)
+    @outputView.refresh gruntfile
 
   refresh: ->
     @activeView.refresh()
-
 
   destroy: ->
     @outputView.destroy()
