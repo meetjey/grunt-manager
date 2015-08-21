@@ -1,3 +1,7 @@
+## 0.1.4
+* Minor style changes
+
+* Moved refresh into toolbar
 ## 0.1.3
 * Fixed refresh
 
