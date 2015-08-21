@@ -6,7 +6,27 @@
 
 .grunt-pane {
   height: 100%;
-  display: block;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .toolbar {
+    flex: 0 0 auto;
+
+    .refresh-button {
+      color: @text-color-info;
+
+      &:hover {
+        color: @background-color-info;
+      }
+
+      &:active {
+        color: @text-color-selected;
+      }
+    }
+
+  }
+
 
   ul {
     max-height: 100%;
@@ -50,47 +70,52 @@
 
   .output-view {
     height: 100%;
-    padding: 5px;
     display: flex;
+    flex-direction: column;
 
-    .task-container {
-      height: 100%;
-      flex: 0 0 30%;
-      border-right: 1px solid @base-border-color;
-      padding-right: 5px;
+    .content-container {
       display: flex;
-      flex-direction:column;
+      flex: 1;
 
-      .task-list-container {
-        flex: 1;
-        overflow: auto;
-      }
+      .task-container {
+        padding-top: 5px;
+        flex: 0 0 30%;
+        border-right: 1px solid @base-border-color;
+        padding-right: 5px;
+        display: flex;
+        flex-direction:column;
 
-      .custom-task-container {
-        padding: 5px;
-        font-size: 12px;
-      }
+        .task-list-container {
+          flex: 1;
+          overflow: auto;
+        }
 
-      .control-container {
-        padding: 0 5px 5px 5px;
-        font-size: 12px;
+        .custom-task-container {
+          padding: 5px;
+          font-size: 12px;
+        }
 
-        button {
-          width: 50%;
+        .control-container {
+          padding: 0 5px 5px 5px;
+          font-size: 12px;
+
+          button {
+            width: 50%;
+          }
         }
       }
-    }
 
-    .output-container {
-      flex: 1;
-      overflow: auto;
-      padding-left: 10px;
-      background-color: @base-background-color;
-
-      pre {
-        padding: 0;
-        font-size: 11px;
+      .output-container {
+        flex: 1;
+        overflow: auto;
+        padding-left: 10px;
         background-color: @base-background-color;
+
+        pre {
+          padding: 0;
+          font-size: 11px;
+          background-color: @base-background-color;
+        }
       }
     }
   }

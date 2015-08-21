@@ -3,19 +3,21 @@
 FileFinderUtil = require '../file-finder-util'
 gruntfileRunner = require '../gruntfile-runner'
 Converter = require 'ansi-to-html'
+{Toolbar} = require 'atom-bottom-dock'
 
 class OutputView extends View
   @content: ->
     @div class: 'output-view', style: "display:flex;", =>
-      @div outlet: 'taskContainer', class: 'task-container', =>
-        @div outlet: 'taskListContainer', class: 'task-list-container', =>
-          @ul outlet: 'taskList'
-        @div outlet: 'customTaskContainer', class: 'custom-task-container', =>
-          @span outlet: 'customTaskLabel', class: 'inline-block', 'Custom Task:'
-        @div outlet: 'controlContainer', class: 'control-container', =>
-          @button outlet: 'backButton', class: 'btn', click: 'onBackClicked', 'Back'
-          @button outlet: 'stopButton', class: 'btn', click: 'onStopClicked', 'Stop'
-      @div outlet: 'outputContainer', class: 'output-container'
+      @div class: 'content-container', =>
+        @div outlet: 'taskContainer', class: 'task-container', =>
+          @div outlet: 'taskListContainer', class: 'task-list-container', =>
+            @ul outlet: 'taskList'
+          @div outlet: 'customTaskContainer', class: 'custom-task-container', =>
+            @span outlet: 'customTaskLabel', class: 'inline-block', 'Custom Task:'
+          @div outlet: 'controlContainer', class: 'control-container', =>
+            @button outlet: 'backButton', class: 'btn', click: 'onBackClicked', 'Back'
+            @button outlet: 'stopButton', class: 'btn', click: 'onStopClicked', 'Stop'
+        @div outlet: 'outputContainer', class: 'output-container'
 
   initialize: ->
     @emitter = new Emitter()
