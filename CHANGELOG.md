@@ -1,3 +1,6 @@
+## 0.1.5
+* More style changes
+
 ## 0.1.4
 * Minor style changes
 
