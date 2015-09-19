@@ -6,9 +6,9 @@ class FileFinderUtil
   @getRelativePath: (filePath) ->
     [projectPath, relativePath] = atom.project.relativizePath filePath
 
-    if atom.project.getPaths().length == 1
+    unless atom.project.getPaths().length > 1 and projectPath
       return relativePath
-
+      
     dirs = projectPath.split path.sep
     path.join dirs[dirs.length - 1], relativePath
 

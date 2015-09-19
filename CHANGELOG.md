@@ -1,3 +1,8 @@
+## 0.1.8
+* Added error handling to file-finder-util
+* Fixed bug where you could run custom task without giving a gruntfile
+* Fixed toolbar height
+
 ## 0.1.7
 * Updated stylings
 * Merged two views into one

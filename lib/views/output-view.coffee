@@ -68,7 +68,7 @@ class OutputView extends View
     @gruntfileRunner = new gruntfileRunner gruntfile.path
 
   runTask: (task) ->
-    @gruntfileRunner.runGrunt task, @onOutput, @onError, @onExit
+    @gruntfileRunner?.runGrunt task, @onOutput, @onError, @onExit
 
   writeOutput: (line, klass) ->
     return unless line?.length
