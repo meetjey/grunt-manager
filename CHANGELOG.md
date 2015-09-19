@@ -1,3 +1,8 @@
+## 0.1.7
+* Updated stylings
+* Merged two views into one
+* Added a clear log button
+
 ## 0.1.6
 * Added more error handling in file-finder-util
 

@@ -14,9 +14,6 @@ class OutputView extends View
             @ul outlet: 'taskList'
           @div outlet: 'customTaskContainer', class: 'custom-task-container', =>
             @span outlet: 'customTaskLabel', class: 'inline-block', 'Custom Task:'
-          @div outlet: 'controlContainer', class: 'control-container', =>
-            @button outlet: 'backButton', class: 'btn', click: 'onBackClicked', 'Back'
-            @button outlet: 'stopButton', class: 'btn', click: 'onStopClicked', 'Stop'
         @div outlet: 'outputContainer', class: 'output-container'
 
   initialize: ->
@@ -28,11 +25,13 @@ class OutputView extends View
 
   setupTaskList: (tasks) ->
     for task in @tasks.sort()
-      listItem = $("<li><span class='icon icon-zap'>#{task}</span></li>")
+      textElement = $("<span class='icon icon-zap'>#{task}</span>")
+      listItem = $('<li>')
 
-      do (task) => listItem.first().on 'click', =>
+      do (task) => textElement.on 'click', =>
         @runTask task
 
+      listItem.append textElement
       @taskList.append listItem
 
   setupCustomTaskInput: ->
@@ -40,7 +39,7 @@ class OutputView extends View
     customTaskInput.setAttribute 'mini', ''
     customTaskInput.getModel().setPlaceholderText 'Press Enter to run'
 
-    #Run if user presses enter
+    # Run if user presses enter
     customTaskInput.addEventListener 'keyup', (e) =>
       @runTask(customTaskInput.getModel().getText()) if e.keyCode == 13
 
@@ -64,18 +63,6 @@ class OutputView extends View
         @onExit code
 
     @gruntfileRunner.getGruntTasks onTaskOutput, @onError, onTaskExit
-
-  onStopClicked: ->
-    if @gruntfileRunner
-      @gruntfileRunner.destroy()
-      @writeOutput('Task Stopped', 'text-info')
-
-  onBackClicked: ->
-    @gulpfile = null
-    @emitter.emit 'backButton:clicked'
-
-  onDidClickBack: (callback) ->
-    @emitter.on 'backButton:clicked', callback
 
   setupGruntfileRunner: (gruntfile) ->
     @gruntfileRunner = new gruntfileRunner gruntfile.path
@@ -105,15 +92,24 @@ class OutputView extends View
     @writeOutput("Exited with code #{code}",
       "#{if code then 'text-error' else 'text-success'}")
 
+  stop: ->
+    if @gruntfileRunner
+      @gruntfileRunner.destroy()
+      @writeOutput('Task Stopped', 'text-info')
+
+  clear: ->
+    @outputContainer.empty()
+
   refresh: (gruntfile) ->
     @destroy()
     @outputContainer.empty()
     @taskList.empty()
 
-    @gruntfile = gruntfile if gruntfile
+    unless gruntfile
+      @gruntfile = null
+      return
 
-    return unless @gruntfile
-
+    @gruntfile = gruntfile
     @setupGruntfileRunner @gruntfile
     @addGruntTasks()
 

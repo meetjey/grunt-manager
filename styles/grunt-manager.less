@@ -11,9 +11,29 @@
   flex-direction: column;
 
   .toolbar {
+
+    select {
+      min-width: 200px;
+      font-size: @font-size;
+      margin-left: 2px 0 0 5px;
+      display: inline-block;
+      width: auto;
+      padding: 0;
+      height: 100%;
+      color: @text-color;
+      border-color: @button-border-color;
+      background-color: @button-background-color;
+      &:hover,
+      &:focus {
+        box-shadow: none;
+        background-color: @button-background-color-hover;
+      }
+    }
+
     flex: 0 0 auto;
 
     .refresh-button {
+      padding-right: 6px;
       color: @text-color-info;
 
       &:hover {
@@ -25,6 +45,31 @@
       }
     }
 
+    .stop-button {
+      padding-right: 4px;
+      color: @text-color-error;
+
+      &:hover {
+        color: @background-color-error;
+      }
+
+      &:active {
+        color: @text-color-selected;
+      }
+    }
+
+    .clear-button {
+      color: @text-color-warning;
+      padding-right: 6px;
+
+      &:hover {
+        color: @background-color-warning;
+      }
+
+      &:active {
+        color: @text-color-selected;
+      }
+    }
   }
 
 
