@@ -1,3 +1,6 @@
+## 0.1.9
+* Fix for output stylings
+
 ## 0.1.8
 * Added error handling to file-finder-util
 * Fixed bug where you could run custom task without giving a gruntfile

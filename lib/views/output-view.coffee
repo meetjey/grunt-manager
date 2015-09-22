@@ -18,7 +18,7 @@ class OutputView extends View
 
   initialize: ->
     @emitter = new Emitter()
-    @converter = new Converter()
+    @converter = new Converter fg: $('<span>').css('color')
     @subscriptions = new CompositeDisposable()
 
     @setupCustomTaskInput()
