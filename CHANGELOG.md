@@ -1,3 +1,6 @@
+## 0.1.11
+* Added error handling to file-finder-util
+
 ## 0.1.10
 * Made output text-copy-and-pastable
 * Changed output window to use font-size set by theme
