@@ -21,8 +21,12 @@ class GruntfileRunner
     tasksStart = lines.indexOf('Available tasks') + 1
     tasksEnd = tasksStart + lines.slice(tasksStart).indexOf('')
 
-    tasks = lines.slice(tasksStart, tasksEnd).map (line) ->
-      line.trim().split(' ')[0]
+    # Very hacky way to pull tasks from grunt --help
+    tasks = lines.slice(tasksStart, tasksEnd)
+      .filter (line ) ->
+        line.trim().split('  ').length > 1
+      .map (line) ->
+        line.trim().split('  ')[0]
 
     tasks
 
