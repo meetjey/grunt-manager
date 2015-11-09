@@ -1,3 +1,6 @@
+## 0.2.13
+* Fixed custom tasks being hidden if there are too many tasks
+
 ## 0.1.12
 * Temporary fix for grunt --help parsing. Need to find a better solution to get tasks
 ## 0.1.11
