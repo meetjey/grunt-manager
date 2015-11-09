@@ -1,3 +1,5 @@
+## 0.1.12
+* Temporary fix for grunt --help parsing. Need to find a better solution to get tasks
 ## 0.1.11
 * Added error handling to file-finder-util
 
