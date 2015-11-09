@@ -8,7 +8,7 @@ class FileFinderUtil
 
     unless atom.project.getPaths().length > 1 and projectPath
       return relativePath
-      
+
     dirs = projectPath.split path.sep
     path.join dirs[dirs.length - 1], relativePath
 
@@ -16,7 +16,7 @@ class FileFinderUtil
   findFiles: (regex) ->
     projPaths = atom.project.getPaths()
 
-    foundFiles = projPaths.filter((p) ->
+    projPaths.filter((p) ->
       try
         fs.statSync(p).isDirectory()
       catch
@@ -26,13 +26,17 @@ class FileFinderUtil
         results.concat files
       , [])
 
-    return foundFiles
-
   findFilesHelper = (cwd, regex) ->
     dirs = []
     files = []
+    entries = []
 
-    for entry in fs.readdirSync(cwd) when entry.indexOf('.') isnt 0
+    try
+      entries = fs.readdirSync cwd
+    catch
+      return files
+
+    for entry in entries when entry.indexOf('.') isnt 0
       if regex.test entry
         files.push(path.join(cwd,entry))
 
@@ -44,7 +48,7 @@ class FileFinderUtil
 
     for dir in dirs
       if foundFiles = findFilesHelper dir, regex
-        files = files.concat(foundFiles)
+        files = files.concat foundFiles
 
     files
 
