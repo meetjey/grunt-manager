@@ -1,6 +1,11 @@
-## 0.1.12
+## 0.1.14
 * Fixed broken stylings due to Atom 1.2.0 release
 
+## 0.1.13
+* Fixed custom tasks being hidden if there are too many tasks
+
+## 0.1.12
+* Temporary fix for grunt --help parsing. Need to find a better solution to get tasks
 ## 0.1.11
 * Added error handling to file-finder-util
 
