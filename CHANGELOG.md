@@ -1,3 +1,6 @@
+## 0.1.12
+* Fixed broken stylings due to Atom 1.2.0 release
+
 ## 0.1.11
 * Added error handling to file-finder-util
 
