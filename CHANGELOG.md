@@ -1,3 +1,6 @@
+## 0.1.15
+* Fixed content being hidden when scrollbar is shown.
+
 ## 0.1.14
 * Fixed broken stylings due to Atom 1.2.0 release
 
