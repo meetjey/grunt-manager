@@ -1,3 +1,6 @@
+## 0.1.16
+* Added isInitial param when adding new pane.
+
 ## 0.1.15
 * Fixed content being hidden when scrollbar is shown.
 

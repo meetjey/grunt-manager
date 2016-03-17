@@ -15,6 +15,22 @@ class ControlsView extends DockPaneView
     @emitter = new Emitter()
     @subscriptions = new CompositeDisposable()
     @fileSelector.change(@onGruntfileSelected)
+    @setupTooltips()
+    
+  setupTooltips: ->
+    config =
+      trigger: 'hover focus'
+      delay:
+        show: 0
+        
+    stopConfig = $.extend true, title: 'Stop current task', config
+    refreshConfig = $.extend true, title: 'Refetch grunt tasks', config
+    clearConfig = $.extend true, title: 'Clear log', config
+        
+    atom.tooltips.add @stopButton, stopConfig
+    atom.tooltips.add @refreshButton, refreshConfig
+    atom.tooltips.add @clearButton, clearConfig
+
 
   updateGruntfiles: (gruntfiles) ->
     @gruntfiles = {}

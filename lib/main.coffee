@@ -20,15 +20,15 @@ module.exports =
       'grunt-manager:add': => @add()
 
   consumeBottomDock: (@bottomDock) ->
-    @add()
+    @add true
 
-  add: ->
+  add: (isInitial) ->
     return unless @bottomDock
 
     newPane = new GruntPane()
     @gruntPanes.push newPane
 
-    @bottomDock.addPane newPane, 'Grunt'
+    @bottomDock.addPane newPane, 'Grunt', isInitial
 
   deactivate: ->
     @subscriptions.dispose()
