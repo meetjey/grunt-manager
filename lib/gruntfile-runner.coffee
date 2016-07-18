@@ -44,9 +44,8 @@ class GruntfileRunner
       for arg in extraArgs.split ' '
         args.push arg
 
-    process.env.PATH = switch process.platform
-      when 'win32' then process.env.PATH
-      else "#{process.env.PATH}:/usr/local/bin"
+    if process.platform != 'win32'
+      process.env.PATH = "#{process.env.PATH}:/usr/local/bin"
 
     options =
       env: process.env
